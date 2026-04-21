@@ -1,0 +1,40 @@
+<!-- Unityを使ったPCとスマホの連動テスト -->
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+  <meta charset="utf-8">
+  <title>WS Test</title>
+</head>
+<body>
+  <button id="connect">接続</button>
+  <button id="send">送信</button>
+  <div id="log"></div>
+
+  <script>
+    let ws = null;
+    const log = (msg) => {
+      document.getElementById("log").innerHTML += msg + "<br>";
+      console.log(msg);
+    };
+
+    document.getElementById("connect").onclick = () => {
+      ws = new WebSocket("ws://localhost:8080/");
+
+      ws.onopen = () => log("connected");
+      ws.onmessage = (e) => log("message: " + e.data);
+      ws.onerror = (e) => log("error");
+      ws.onclose = () => log("closed");
+    };
+
+    document.getElementById("send").onclick = () => {
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send("hello from browser");
+        log("sent: hello from browser");
+      } else {
+        log("not connected");
+      }
+    };
+  </script>
+</body>
+</html>
