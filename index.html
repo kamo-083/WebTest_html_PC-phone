@@ -29,6 +29,8 @@
 <body>
   <button id="connect">接続</button>
   <button id="send">送信</button>
+  <button id="up">上</button>
+  <button id="down">下</button>
   <div id="log"></div>
 
   <script>
@@ -58,7 +60,25 @@
         log("sent: hello from browser");
       } else {
         log("not connected");
-      }
+      };
+
+      document.getElementById("up").onclick = () => {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          ws.send("up");
+          log("sent: up");
+        } else {
+          log("not connected");
+        }
+      };
+
+      document.getElementById("down").onclick = () => {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          ws.send("down");
+          log("sent: down");
+        } else {
+          log("not connected");
+        }
+      };
     };
   </script>
 </body>
