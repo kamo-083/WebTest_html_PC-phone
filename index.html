@@ -31,6 +31,8 @@
   <button id="send">送信</button>
   <button id="up">上</button>
   <button id="down">下</button>
+  <button id="left">左</button>
+  <button id="right">右</button>
   <div id="log"></div>
 
   <script>
@@ -75,6 +77,24 @@
         if (ws && ws.readyState === WebSocket.OPEN) {
           ws.send("down");
           log("sent: down");
+        } else {
+          log("not connected");
+        }
+      };
+      
+      document.getElementById("left").onclick = () => {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          ws.send("left");
+          log("sent: left");
+        } else {
+          log("not connected");
+        }
+      };
+      
+      document.getElementById("right").onclick = () => {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          ws.send("right");
+          log("sent: right");
         } else {
           log("not connected");
         }
