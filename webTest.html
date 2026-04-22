@@ -19,7 +19,12 @@
     };
 
     document.getElementById("connect").onclick = () => {
-      ws = new WebSocket("ws://localhost:8080/");
+      ws = new WebSocket("ws://172.24.63.16:8080/");
+      /*
+       "ws://○○:××" 
+         ○○: サーバーのIPアドレスやドメイン名。自分自身なら"localhost"
+         ××: サーバーがWebSocket通信を待ち受けているポート番号
+      */
 
       ws.onopen = () => log("connected");
       ws.onmessage = (e) => log("message: " + e.data);
